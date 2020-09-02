@@ -20,10 +20,15 @@ object galvan {
 
 object baigorria{
 	var empanadasVendidas = 0
+	var totalCobrado = 0
 	method sueldo() {
 		return 15 * empanadasVendidas
 	}
 	method vender(cantidad) {
 		empanadasVendidas += cantidad
+		totalCobrado = self.sueldo()
+	}
+	method totalCobrado() {
+		return totalCobrado
 	}
 }
