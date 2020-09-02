@@ -2,6 +2,7 @@ object gimenez {
 	var fondo = 300000
 	method pagarSueldo(empleado){
 		fondo -= empleado.sueldo()
+		empleado.recibeDinero(empleado.sueldo())
 	}
 	method fondo(){
 		return fondo
@@ -19,11 +20,14 @@ object galvan {
 		return sueldo
 	}
 	method gastar(cuanto) {
-		if (dinero > cuanto)
-		{
+		if (dinero >= cuanto) {
 			dinero -= cuanto
+			deuda = 0
+		} else {
+			deuda += (cuanto - dinero)
+			dinero = 0
 		}
-		deuda += cuanto
+		
 	}
 	method deuda() {
 		return deuda
@@ -31,13 +35,22 @@ object galvan {
 	method dinero() {
 		return dinero
 	}
+	method recibeDinero(cantidad){
+		if (cantidad >= deuda) {
+			dinero += cantidad - deuda
+			deuda = 0
+		} else {
+			deuda -= cantidad
+		}		
+	}
 }
 
 object baigorria{
 	var empanadasVendidas = 0
 	var totalCobrado = 0
+	const montoEmpanada = 15
 	method sueldo() {
-		return 15 * empanadasVendidas
+		return montoEmpanada * empanadasVendidas
 	}
 	method vender(cantidad) {
 		empanadasVendidas += cantidad
@@ -46,4 +59,5 @@ object baigorria{
 	method totalCobrado() {
 		return totalCobrado
 	}
+	method recibeDinero(n){ /* sin efecto */ }
 }
