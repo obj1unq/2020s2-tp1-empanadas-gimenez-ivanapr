@@ -9,13 +9,28 @@ object gimenez {
 }
 
 object galvan {
+	var deuda = 0
+	var dinero = 0
 	var sueldo = 15000
 	method sueldo(nuevoSueldo) {
 		sueldo = nuevoSueldo
 	}
 	method sueldo() {
 		return sueldo
-	}	
+	}
+	method gastar(cuanto) {
+		if (dinero > cuanto)
+		{
+			dinero -= cuanto
+		}
+		deuda += cuanto
+	}
+	method deuda() {
+		return deuda
+	}
+	method dinero() {
+		return dinero
+	}
 }
 
 object baigorria{
