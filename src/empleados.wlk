@@ -2,7 +2,7 @@ object gimenez {
 	var fondo = 300000
 	method pagarSueldo(empleado){
 		fondo -= empleado.sueldo()
-		empleado.recibeDinero(empleado.sueldo())
+		empleado.cobra()
 	}
 	method fondo(){
 		return fondo
@@ -19,29 +19,20 @@ object galvan {
 	method sueldo() {
 		return sueldo
 	}
+	method cobra() {
+		dinero += sueldo
+		dinero = 0.max((dinero - deuda).abs())
+		deuda = (0.min(deuda-dinero)).abs()
+	}
 	method gastar(cuanto) {
-		if (dinero >= cuanto) {
-			dinero -= cuanto
-			deuda = 0
-		} else {
-			deuda += (cuanto - dinero)
-			dinero = 0
-		}
-		
+		deuda += (0.min(dinero-cuanto)).abs()
+		dinero = 0.max(dinero-cuanto)
 	}
 	method deuda() {
 		return deuda
 	}
 	method dinero() {
 		return dinero
-	}
-	method recibeDinero(cantidad){
-		if (cantidad >= deuda) {
-			dinero += cantidad - deuda
-			deuda = 0
-		} else {
-			deuda -= cantidad
-		}		
 	}
 }
 
@@ -54,10 +45,11 @@ object baigorria{
 	}
 	method vender(cantidad) {
 		empanadasVendidas += cantidad
-		totalCobrado = self.sueldo()
 	}
 	method totalCobrado() {
 		return totalCobrado
 	}
-	method recibeDinero(n){ /* sin efecto */ }
+	method cobra(){
+		totalCobrado = self.sueldo()
+	}
 }
